@@ -2,29 +2,23 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-func reverseWord(w string) string {
-	rw := []rune(w)
-
-	for i, j := 0, len(rw)-1; i < j; i, j = i+1, j-1 {
-		rw[i], rw[j] = rw[j], rw[i]
-	}
-
-	return string(rw)
-}
-
 func reverseWords(s string) string {
-	words := strings.Split(s, " ")
-
 	var out string
-	for i := 0; i < len(words)-1; i++ {
-		out += reverseWord(words[i])
-		out += " "
+	var rw string
+
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == ' ' {
+			out = rw + out
+			rw = ""
+			out = " " + out
+		} else {
+			rw += string(s[i])
+		}
 	}
 
-	out += reverseWord(words[len(words)-1])
+	out = rw + out
 
 	return out
 }
