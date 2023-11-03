@@ -48,8 +48,28 @@ import "fmt"
 //		return max
 //	}
 func maxArea(height []int) int {
+	left, right := 0, len(height)-1
 
-	return 0
+	max, h := 0, 0
+	for left < right {
+		if height[left] <= height[right] {
+			h = height[left]
+		} else {
+			h = height[right]
+		}
+
+		if max < h*(right-left) {
+			max = h * (right - left)
+		}
+
+		if height[left] <= height[right] {
+			left++
+		} else {
+			right--
+		}
+	}
+
+	return max
 }
 
 func main() {
