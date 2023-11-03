@@ -21,12 +21,38 @@ import "fmt"
 // 	return max
 // }
 
+// 5%
+//
+//	func maxArea(height []int) int {
+//		var max, mh, tmp int
+//
+//		for i := 0; i < len(height)-1; i++ {
+//			for j := len(height) - 1; j > i; j-- {
+//				if height[i] <= height[j] {
+//					mh = height[i]
+//				} else {
+//					mh = height[j]
+//				}
+//
+//				tmp = mh * (j - i)
+//				if max < tmp {
+//					max = tmp
+//				}
+//
+//				if height[i] <= height[j] {
+//					break
+//				}
+//			}
+//		}
+//
+//		return max
+//	}
 func maxArea(height []int) int {
-	m := make(map[int]int, len(height)-1)
 
 	return 0
 }
 
 func main() {
 	fmt.Println(maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7}))
+	fmt.Println(maxArea([]int{1, 1}))
 }
