@@ -1,5 +1,7 @@
 package main
 
+import "sync"
+
 // 12%
 //func getLastMoment(n int, left []int, right []int) int {
 //	res := 0
@@ -50,6 +52,7 @@ package main
 //}
 
 // 62%
+// 86% with goroutine
 func getLastMoment(n int, left []int, right []int) int {
 	res := 0
 
@@ -58,16 +61,28 @@ func getLastMoment(n int, left []int, right []int) int {
 	}
 
 	minRight, maxLeft := n, 0
-	for i := 0; i < len(right); i++ {
-		if minRight > right[i] {
-			minRight = right[i]
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+
+	go func() {
+		for i := 0; i < len(right); i++ {
+			if minRight > right[i] {
+				minRight = right[i]
+			}
 		}
-	}
-	for i := 0; i < len(left); i++ {
-		if maxLeft < left[i] {
-			maxLeft = left[i]
+		wg.Done()
+	}()
+
+	go func() {
+		for i := 0; i < len(left); i++ {
+			if maxLeft < left[i] {
+				maxLeft = left[i]
+			}
 		}
-	}
+		wg.Done()
+	}()
+
+	wg.Wait()
 
 	switch {
 	case len(left) == 0 && len(right) != 0:
