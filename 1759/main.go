@@ -19,7 +19,8 @@ func countHomogenous(s string) int {
 		}
 	}
 
-	out += count * (count + 1) / 2
+	// return it modulo 1e9 + 7
+	out += count * (count + 1) / 2 % (1e9 + 7)
 
 	return out
 }
