@@ -13,6 +13,14 @@ func Test_maxFrequency(t *testing.T) {
 		want int
 	}{
 		{
+			name: "0",
+			args: args{
+				nums: []int{1, 2, 2, 5, 5, 10},
+				k:    1,
+			},
+			want: 3,
+		},
+		{
 			name: "1",
 			args: args{
 				nums: []int{1, 2, 4},
