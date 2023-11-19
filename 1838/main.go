@@ -36,40 +36,43 @@ import (
 //}
 
 func maxFrequency(nums []int, k int) int {
-	if len(nums) == 1 {
-		return 1
-	}
-
 	sort.Slice(nums, func(i, j int) bool {
 		return nums[j] > nums[i]
 	})
 
-	res := len(nums)
 	sum := 0
-	max := nums[len(nums)-1]
+
 	for i := 0; i < len(nums)-1; i++ {
-		sum += max - nums[i]
+		sum += nums[len(nums)-1] - nums[i]
 	}
 
-	i, j := 0, len(nums)-2
-	for i <= j {
-		if res == 1 {
-			return 1
+	if sum <= k {
+		return len(nums)
+	}
+
+	j := len(nums) - 1
+	m := 1
+	for {
+		if m > j {
+			return m
 		}
+
+		s := sum
+		for i := 0; i < j; i++ {
+			s -= nums[j] - nums[i]
+			if s <= k {
+				if m < j-i {
+					m = j - i
+				}
+				break
+			}
+		}
+
+		sum -= (nums[j] - nums[j-1]) * j
 		if sum <= k {
-			return res
+			return j
 		}
 
-		if nums[i+1]-nums[i] > nums[j+1]-nums[j] {
-			sum -= nums[j+1] - nums[i]
-			i++
-		} else {
-			sum -= (nums[j+1] - nums[j]) * (res - 1)
-			j--
-		}
-
-		res--
+		j--
 	}
-
-	return res
 }

@@ -15,7 +15,8 @@ func Test_maxFrequency(t *testing.T) {
 		{
 			name: "0",
 			args: args{
-				nums: []int{1, 2, 2, 5, 5, 10},
+				//nums: []int{1, 2, 4, 5, 5, 10},
+				nums: []int{1, 2, 4, 5, 5},
 				k:    1,
 			},
 			want: 3,
