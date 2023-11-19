@@ -86,13 +86,41 @@ func maxFrequency(nums []int, k int) int {
 		sum += nums[len(nums)-1] - nums[i]
 	}
 
-	i, j := 0, len(nums)-1
-	for i < j {
-		if sum <= k {
-			return j + 1 - i
-		}
-
+	if sum <= k {
+		return len(nums)
 	}
 
-	return sum
+	s1 := sum - (nums[len(nums)-1] - nums[0])
+	s2 := sum - (nums[len(nums)-1]-nums[len(nums)-2])*(len(nums)-1)
+
+	r1 := fff(nums, 1, len(nums)-1, s1, k)
+	r2 := fff(nums, 0, len(nums)-2, s2, k)
+
+	if r1 <= r2 {
+		return r2
+	}
+
+	return r1
+}
+
+func fff(nums []int, i, j, sum, k int) int {
+	if i == j {
+		return 1
+	}
+
+	if sum <= k {
+		return j - i + 1
+	}
+
+	s1 := sum - (nums[j] - nums[i])
+	s2 := sum - (nums[j]-nums[j-1])*(j-i)
+
+	r1 := fff(nums, i+1, j, s1, k)
+	r2 := fff(nums, i, j-1, s2, k)
+
+	if r1 <= r2 {
+		return r2
+	}
+
+	return r1
 }
