@@ -1,8 +1,6 @@
 package main
 
-import (
-	"sort"
-)
+import "sort"
 
 // time limit
 //func maxFrequency(nums []int, k int) int {
@@ -35,6 +33,48 @@ import (
 //	return res
 //}
 
+//func maxFrequency(nums []int, k int) int {
+//	sort.Slice(nums, func(i, j int) bool {
+//		return nums[j] > nums[i]
+//	})
+//
+//	sum := 0
+//
+//	for i := 0; i < len(nums)-1; i++ {
+//		sum += nums[len(nums)-1] - nums[i]
+//	}
+//
+//	if sum <= k {
+//		return len(nums)
+//	}
+//
+//	j := len(nums) - 1
+//	m := 1
+//	for {
+//		if m > j {
+//			return m
+//		}
+//
+//		s := sum
+//		for i := 0; i < j; i++ {
+//			s -= nums[j] - nums[i]
+//			if s <= k {
+//				if m < j-i {
+//					m = j - i
+//				}
+//				break
+//			}
+//		}
+//
+//		sum -= (nums[j] - nums[j-1]) * j
+//		if sum <= k {
+//			return j
+//		}
+//
+//		j--
+//	}
+//}
+
 func maxFrequency(nums []int, k int) int {
 	sort.Slice(nums, func(i, j int) bool {
 		return nums[j] > nums[i]
@@ -46,33 +86,13 @@ func maxFrequency(nums []int, k int) int {
 		sum += nums[len(nums)-1] - nums[i]
 	}
 
-	if sum <= k {
-		return len(nums)
-	}
-
-	j := len(nums) - 1
-	m := 1
-	for {
-		if m > j {
-			return m
-		}
-
-		s := sum
-		for i := 0; i < j; i++ {
-			s -= nums[j] - nums[i]
-			if s <= k {
-				if m < j-i {
-					m = j - i
-				}
-				break
-			}
-		}
-
-		sum -= (nums[j] - nums[j-1]) * j
+	i, j := 0, len(nums)-1
+	for i < j {
 		if sum <= k {
-			return j
+			return j + 1 - i
 		}
 
-		j--
 	}
+
+	return sum
 }
