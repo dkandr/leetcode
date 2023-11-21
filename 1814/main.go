@@ -54,6 +54,5 @@ func countNicePairs(nums []int) int {
 		res += v * (v - 1) / 2
 	}
 
-	mod := 1000000007
-	return res % mod
+	return res % int(1e9+7)
 }
