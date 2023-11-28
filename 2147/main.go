@@ -63,7 +63,7 @@ func numberOfWays(corridor string) int {
 		}
 	}
 
-	if allSeats < 2 || allSeats%2 == 1 {
+	if allSeats == 0 || allSeats%2 == 1 {
 		return 0
 	}
 
