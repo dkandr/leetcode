@@ -2,6 +2,7 @@ package main
 
 func arrayStringsAreEqual(word1 []string, word2 []string) bool {
 	var w1, w2, p1, p2 int
+
 	for {
 		if p1 == len(word1[w1]) {
 			p1 = 0
