@@ -6,6 +6,10 @@ func countCharacters(words []string, chars string) int {
 	var res int
 	var f bool
 	for i := 0; i < len(words); i++ {
+		if len(words[i]) > len(chars) {
+			continue
+		}
+
 		mWord := getWordMap(words[i])
 
 		for k, v := range mWord {
