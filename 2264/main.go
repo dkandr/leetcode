@@ -17,7 +17,7 @@ func largestGoodInteger(num string) string {
 			continue
 		}
 
-		if num[i] == last && count < 3 {
+		if num[i] == last {
 			count++
 
 			if count > 2 {
