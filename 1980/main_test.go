@@ -30,7 +30,7 @@ func Test_findDifferentBinaryString(t *testing.T) {
 			args: args{
 				nums: []string{"111", "011", "001"},
 			},
-			want: "101",
+			want: "000",
 		},
 	}
 	for _, tt := range tests {
